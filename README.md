@@ -2,7 +2,7 @@
 
 Serialization tool
 
-[中文](./README.md)
+[中文](./README_zh_CN.md)
 
 Support Function:
 - [x] Domain object serialization
