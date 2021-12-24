@@ -6,7 +6,7 @@
 
     <groupId>com.github.thierrysquirrel</groupId>
     <artifactId>ants</artifactId>
-    <version>1.0.0.1-RELEASE</version>
+    <version>1.0.0.2-RELEASE</version>
 
     <name>ants</name>
     <description>ants</description>
@@ -14,7 +14,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <logback-classic.version>1.2.7</logback-classic.version>
+        <logback-classic.version>1.2.9</logback-classic.version>
         <lombok.version>1.18.22</lombok.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-javadoc-plugin.version>3.3.1</maven-javadoc-plugin.version>
