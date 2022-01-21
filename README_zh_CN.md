@@ -22,7 +22,7 @@ byte[].
         <dependency>
             <groupId>com.github.thierrysquirrel</groupId>
             <artifactId>ants</artifactId>
-            <version>1.0.0.2-RELEASE</version>
+            <version>1.0.0.3-RELEASE</version>
         </dependency>
 ```
 
