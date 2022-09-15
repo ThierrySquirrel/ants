@@ -22,7 +22,7 @@ byte[].
         <dependency>
             <groupId>com.github.thierrysquirrel</groupId>
             <artifactId>ants</artifactId>
-            <version>1.0.0.5-RELEASE</version>
+            <version>1.1.0.0-RELEASE</version>
         </dependency>
 ```
 
@@ -62,4 +62,4 @@ public class User {
 }
 ```
 
-![AmericanFlag](https://user-images.githubusercontent.com/49895274/184471268-e643cd89-0e90-4fb5-b9de-074d93219d01.jpeg)  
+![Russian flag](https://user-images.githubusercontent.com/49895274/190374657-b41dcfac-f620-4c9a-b152-4b4908f53ce7.png)

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.template.builder;
 
 import com.github.thierrysquirrel.ants.core.template.ByteBufferTemplate;
@@ -23,29 +23,29 @@ import java.nio.ByteBuffer;
 /**
  * Classname: ByteBufferTemplateBuilder
  * Description:
- * Date: 2021/11/3 15:13
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class ByteBufferTemplateBuilder {
     private ByteBufferTemplateBuilder() {
     }
 
     public static ByteBufferTemplate builderSerializeByteBufferTemplate() {
-        ByteBufferTemplate byteBufferTemplate = new ByteBufferTemplate ();
-        ByteBuffer byteBuff = ByteBuffer.allocate (ByteBufferTemplateConstant.INIT_SIZE);
-        byteBufferTemplate.setByteBuffer (byteBuff);
+        ByteBufferTemplate byteBufferTemplate = new ByteBufferTemplate();
+        ByteBuffer byteBuff = ByteBuffer.allocate(ByteBufferTemplateConstant.INIT_SIZE);
+        byteBufferTemplate.setByteBuffer(byteBuff);
         return byteBufferTemplate;
     }
 
     public static ByteBufferTemplate builderDeSerializeByteBufferTemplate(byte[] domainBytes) {
-        ByteBufferTemplate byteBufferTemplate = new ByteBufferTemplate ();
-        ByteBuffer byteBuff = ByteBuffer.allocate (domainBytes.length);
+        ByteBufferTemplate byteBufferTemplate = new ByteBufferTemplate();
+        ByteBuffer byteBuff = ByteBuffer.allocate(domainBytes.length);
 
-        byteBufferTemplate.setByteBuffer (byteBuff);
-        byteBufferTemplate.putBytes (domainBytes);
-        byteBufferTemplate.flip ();
+        byteBufferTemplate.setByteBuffer(byteBuff);
+        byteBufferTemplate.putBytes(domainBytes);
+        byteBufferTemplate.flip();
         return byteBufferTemplate;
     }
 }

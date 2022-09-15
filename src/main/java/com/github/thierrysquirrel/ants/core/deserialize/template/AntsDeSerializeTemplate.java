@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.deserialize.template;
 
 import com.github.thierrysquirrel.ants.core.constant.AntsTypeConstant;
@@ -30,94 +30,94 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Classname: AntsDeSerializeTemplate
  * Description:
- * Date: 2021/11/3 15:40
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class AntsDeSerializeTemplate extends AbstractAntsDeSerialize {
     public byte getOffset() {
-        return getByteBufferTemplate ().getByte ();
+        return getByteBufferTemplate().getByte();
     }
 
     public byte[] getBytes() {
-        return getDataLengthAndDataBytes ();
+        return getDataLengthAndDataBytes();
     }
 
     public byte getByte() {
-        return getByteBufferTemplate ().getByte ();
+        return getByteBufferTemplate().getByte();
     }
 
     public short getShort() {
-        return (short) getCommonInteger ();
+        return (short) getCommonInteger();
     }
 
     public int getInteger() {
-        return (int) getCommonInteger ();
+        return (int) getCommonInteger();
     }
 
     public long getLong() {
-        return getCommonInteger ();
+        return getCommonInteger();
     }
 
     public float getFloat() {
-        long commonInteger = getCommonInteger ();
-        return Float.intBitsToFloat ((int) commonInteger);
+        long commonInteger = getCommonInteger();
+        return Float.intBitsToFloat((int) commonInteger);
     }
 
     public double getDouble() {
-        long commonInteger = getCommonInteger ();
-        return Double.longBitsToDouble (commonInteger);
+        long commonInteger = getCommonInteger();
+        return Double.longBitsToDouble(commonInteger);
     }
 
     public boolean getBoolean() {
-        byte data = getByte ();
-        return ByteBooleanConvertFactory.byteConvertBoolean (data);
+        byte data = getByte();
+        return ByteBooleanConvertFactory.byteConvertBoolean(data);
     }
 
     public char getChar() {
-        return (char) getCommonInteger ();
+        return (char) getCommonInteger();
     }
 
     public String getString() {
-        byte[] dataBytes = getDataLengthAndDataBytes ();
-        return new String (dataBytes);
+        byte[] dataBytes = getDataLengthAndDataBytes();
+        return new String(dataBytes);
     }
 
     public Object getEnum(Class<?> dataClass) throws ClassNotFoundException {
-        byte offset = getByte ();
+        byte offset = getByte();
         if (dataClass == null) {
-            dataClass = getObjectClass ();
+            dataClass = getObjectClass();
         }
-        Object[] enumConstants = dataClass.getEnumConstants ();
+        Object[] enumConstants = dataClass.getEnumConstants();
         return enumConstants[offset];
     }
 
     @SuppressWarnings("unchecked")
     public <T> T getDomain(Class<T> domainClazz) throws ClassNotFoundException {
-        byte[] dataBytes = getDataLengthAndDataBytes ();
+        byte[] dataBytes = getDataLengthAndDataBytes();
         if (domainClazz == null) {
-            domainClazz = (Class<T>) getObjectClass ();
+            domainClazz = (Class<T>) getObjectClass();
         }
-        return AntsUtils.deSerialize (dataBytes, domainClazz);
+        return AntsUtils.deSerialize(dataBytes, domainClazz);
     }
 
     public Object getObject() throws ClassNotFoundException {
-        return baseGetObject (null);
+        return baseGetObject(null);
     }
 
     public Object[] getArrays(byte offset, Class<?> listClass, Class<?> componentType) throws ClassNotFoundException {
-        List<Object> list = getList (offset, listClass);
-        Object[] newObjects = (Object[]) Array.newInstance (componentType, list.size ());
-        return list.toArray (newObjects);
+        List<Object> list = getList(offset, listClass);
+        Object[] newObjects = (Object[]) Array.newInstance(componentType, list.size());
+        return list.toArray(newObjects);
     }
 
     public List<Object> getList(byte offset, Class<?> listClass) throws ClassNotFoundException {
-        List<Object> list = new ArrayList<> ();
+        List<Object> list = new ArrayList<>();
         while (true) {
-            Object data = baseGetObject (listClass);
-            list.add (data);
-            if (isStop (offset)) {
+            Object data = baseGetObject(listClass);
+            list.add(data);
+            if (isStop(offset)) {
                 return list;
             }
         }
@@ -125,13 +125,13 @@ public class AntsDeSerializeTemplate extends AbstractAntsDeSerialize {
     }
 
     public Map<Object, Object> getMap(byte offset, Class<?> keyClass, Class<?> valueClass) throws ClassNotFoundException {
-        Map<Object, Object> map = new ConcurrentHashMap<> (MapConstant.MAP_INIT);
+        Map<Object, Object> map = new ConcurrentHashMap<>(MapConstant.MAP_INIT);
         while (true) {
-            Object key = baseGetObject (keyClass);
-            getOffset ();
-            Object value = baseGetObject (valueClass);
-            map.put (key, value);
-            if (isStop (offset)) {
+            Object key = baseGetObject(keyClass);
+            getOffset();
+            Object value = baseGetObject(valueClass);
+            map.put(key, value);
+            if (isStop(offset)) {
                 return map;
             }
         }
@@ -139,63 +139,63 @@ public class AntsDeSerializeTemplate extends AbstractAntsDeSerialize {
 
 
     private byte getType() {
-        return getByteBufferTemplate ().getByte ();
+        return getByteBufferTemplate().getByte();
     }
 
     private Class<?> getObjectClass() throws ClassNotFoundException {
-        byte[] dataBytes = getDataLengthAndDataBytes ();
-        String className = new String (dataBytes);
-        return Class.forName (className);
+        byte[] dataBytes = getDataLengthAndDataBytes();
+        String className = new String(dataBytes);
+        return Class.forName(className);
     }
 
     private Object baseGetObject(Class<?> objectClass) throws ClassNotFoundException {
-        byte type = getType ();
+        byte type = getType();
         switch (type) {
             case AntsTypeConstant.BYTE: {
-                return getByte ();
+                return getByte();
             }
             case AntsTypeConstant.SHORT: {
-                return getShort ();
+                return getShort();
             }
             case AntsTypeConstant.INTEGER: {
-                return getInteger ();
+                return getInteger();
             }
             case AntsTypeConstant.LONG: {
-                return getLong ();
+                return getLong();
             }
             case AntsTypeConstant.FLOAT: {
-                return getFloat ();
+                return getFloat();
             }
             case AntsTypeConstant.DOUBLE: {
-                return getDouble ();
+                return getDouble();
             }
             case AntsTypeConstant.BOOLEAN: {
-                return getBoolean ();
+                return getBoolean();
             }
             case AntsTypeConstant.CHARACTER: {
-                return getChar ();
+                return getChar();
             }
             case AntsTypeConstant.STRING: {
-                return getString ();
+                return getString();
             }
             case AntsTypeConstant.ENUM: {
-                return getEnum (objectClass);
+                return getEnum(objectClass);
             }
             default: {
-                return getDomain (objectClass);
+                return getDomain(objectClass);
             }
         }
     }
 
     private boolean isStop(byte offset) {
-        int length = getByteBufferTemplate ().getLength ();
+        int length = getByteBufferTemplate().getLength();
         if (length <= 0) {
             return Boolean.TRUE;
         }
-        getByteBufferTemplate ().make ();
-        byte nextOffset = getByte ();
+        getByteBufferTemplate().make();
+        byte nextOffset = getByte();
         if (offset != nextOffset) {
-            getByteBufferTemplate ().reset ();
+            getByteBufferTemplate().reset();
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

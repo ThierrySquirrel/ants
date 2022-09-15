@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,21 +12,22 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.factory.constant;
 
 /**
  * Classname: BitOperationConstant
  * Description:
- * Date: 2021/11/3 14:10
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public final class BitOperationConstant {
     public static final int BYTE_BIT_SIZE = 8;
     public static final int UNSIGNED_BYTE_MAX = 255;
-    public static final int UNSIGNED_BYTE_TO_SINGED=256;
+    public static final int UNSIGNED_BYTE_TO_SINGED = 256;
+
     private BitOperationConstant() {
     }
 }

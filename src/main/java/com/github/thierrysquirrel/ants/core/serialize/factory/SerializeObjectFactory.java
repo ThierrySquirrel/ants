@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.serialize.factory;
 
 import com.github.thierrysquirrel.ants.core.serialize.template.AntsSerializeTemplate;
@@ -24,27 +24,27 @@ import java.lang.reflect.Field;
 /**
  * Classname: SerializeObjectFactory
  * Description:
- * Date: 2021/11/3 15:16
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 @Slf4j
 public class SerializeObjectFactory {
     private SerializeObjectFactory() {
     }
 
     public static byte[] serializeObject(Object domain) {
-        Class<?> domainClass = domain.getClass ();
-        Field[] declaredFields = domainClass.getDeclaredFields ();
-        AntsSerializeTemplate antsSerializeTemplate = AntsSerializeTemplateBuilder.builderAntsSerializeTemplate ();
+        Class<?> domainClass = domain.getClass();
+        Field[] declaredFields = domainClass.getDeclaredFields();
+        AntsSerializeTemplate antsSerializeTemplate = AntsSerializeTemplateBuilder.builderAntsSerializeTemplate();
         for (Field declaredField : declaredFields) {
             try {
-                SerializeFieldFactory.serializeField (antsSerializeTemplate,domain,declaredField);
+                SerializeFieldFactory.serializeField(antsSerializeTemplate, domain, declaredField);
             } catch (IllegalAccessException e) {
-                log.error ("serializeObject Error",e);
+                log.error("serializeObject Error", e);
             }
         }
-        return antsSerializeTemplate.getByteBufferTemplate ().getAllBytes ();
+        return antsSerializeTemplate.getByteBufferTemplate().getAllBytes();
     }
 }

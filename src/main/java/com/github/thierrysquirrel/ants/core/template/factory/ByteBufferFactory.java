@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.template.factory;
 
 import java.nio.ByteBuffer;
@@ -20,24 +20,24 @@ import java.nio.ByteBuffer;
 /**
  * Classname: ByteBufferFactory
  * Description:
- * Date: 2021/11/3 13:35
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class ByteBufferFactory {
     private ByteBufferFactory() {
     }
 
     public static int getLength(ByteBuffer byteBuffer) {
-        int position = byteBuffer.position ();
-        int limit = byteBuffer.limit ();
+        int position = byteBuffer.position();
+        int limit = byteBuffer.limit();
         return limit - position;
     }
 
     public static byte[] getAllBytes(ByteBuffer byteBuffer) {
-        byte[] data = new byte[getLength (byteBuffer)];
-        byteBuffer.get (data);
+        byte[] data = new byte[getLength(byteBuffer)];
+        byteBuffer.get(data);
         return data;
     }
 }

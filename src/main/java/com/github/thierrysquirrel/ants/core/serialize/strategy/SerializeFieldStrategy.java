@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.serialize.strategy;
 
 import com.github.thierrysquirrel.ants.core.constant.BaseTypeNameConstant;
@@ -24,11 +24,11 @@ import java.util.Map;
 /**
  * Classname: SerializeFieldStrategy
  * Description:
- * Date: 2021/11/3 15:27
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class SerializeFieldStrategy {
     private SerializeFieldStrategy() {
     }
@@ -37,54 +37,54 @@ public class SerializeFieldStrategy {
     public static void serializeFieldStrategy(AntsSerializeTemplate antsSerializeTemplate, Object fieldData, String typeName) {
         switch (typeName) {
             case BaseTypeNameConstant.BYTE: {
-                antsSerializeTemplate.putByte ((Byte) fieldData);
+                antsSerializeTemplate.putByte((Byte) fieldData);
                 break;
             }
             case BaseTypeNameConstant.SHORT: {
-                antsSerializeTemplate.putShort ((Short) fieldData);
+                antsSerializeTemplate.putShort((Short) fieldData);
                 break;
             }
             case BaseTypeNameConstant.INTEGER: {
-                antsSerializeTemplate.putInteger ((Integer) fieldData);
+                antsSerializeTemplate.putInteger((Integer) fieldData);
                 break;
             }
             case BaseTypeNameConstant.LONG: {
-                antsSerializeTemplate.putLong ((Long) fieldData);
+                antsSerializeTemplate.putLong((Long) fieldData);
                 break;
             }
             case BaseTypeNameConstant.FLOAT: {
-                antsSerializeTemplate.putFloat ((Float) fieldData);
+                antsSerializeTemplate.putFloat((Float) fieldData);
                 break;
             }
             case BaseTypeNameConstant.DOUBLE:
-                antsSerializeTemplate.putDouble ((Double) fieldData);
+                antsSerializeTemplate.putDouble((Double) fieldData);
                 break;
             case BaseTypeNameConstant.BOOLEAN: {
-                antsSerializeTemplate.putBoolean ((Boolean) fieldData);
+                antsSerializeTemplate.putBoolean((Boolean) fieldData);
                 break;
             }
             case BaseTypeNameConstant.CHARACTER: {
-                antsSerializeTemplate.putCharacter ((Character) fieldData);
+                antsSerializeTemplate.putCharacter((Character) fieldData);
                 break;
             }
             case BaseTypeNameConstant.STRING: {
-                antsSerializeTemplate.putString ((String) fieldData);
+                antsSerializeTemplate.putString((String) fieldData);
                 break;
             }
             case BaseTypeNameConstant.OBJECT: {
-                antsSerializeTemplate.putObject (fieldData);
+                antsSerializeTemplate.putObject(fieldData);
                 break;
             }
             case BaseTypeNameConstant.LIST: {
-                antsSerializeTemplate.putList ((List<Object>) fieldData);
+                antsSerializeTemplate.putList((List<Object>) fieldData);
                 break;
             }
             case BaseTypeNameConstant.MAP: {
-                antsSerializeTemplate.putMap ((Map<Object, Object>) fieldData);
+                antsSerializeTemplate.putMap((Map<Object, Object>) fieldData);
                 break;
             }
             default: {
-                antsSerializeTemplate.putDomain (fieldData);
+                antsSerializeTemplate.putDomain(fieldData);
                 break;
             }
         }

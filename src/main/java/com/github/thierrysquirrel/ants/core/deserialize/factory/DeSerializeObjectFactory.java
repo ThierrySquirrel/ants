@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.deserialize.factory;
 
 import com.github.thierrysquirrel.ants.core.deserialize.template.AntsDeSerializeTemplate;
@@ -24,37 +24,37 @@ import java.lang.reflect.Field;
 /**
  * Classname: DeSerializeObjectFactory
  * Description:
- * Date: 2021/11/3 16:37
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 @Slf4j
 public class DeSerializeObjectFactory {
     private DeSerializeObjectFactory() {
     }
 
-    public static <T> T deSerializeObject(byte[] domainBytes, Class<T> domainClass){
+    public static <T> T deSerializeObject(byte[] domainBytes, Class<T> domainClass) {
         T domain = null;
         try {
-            domain = domainClass.getDeclaredConstructor ().newInstance ();
+            domain = domainClass.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
-            log.error ("newInstance",e);
+            log.error("newInstance", e);
         }
 
-        Field[] declaredFields = domainClass.getDeclaredFields ();
-        AntsDeSerializeTemplate antsDeSerializeTemplate = AntsDeSerializeTemplateBuilder.builderAntsDeSerializeTemplate (domainBytes);
-        while (true){
-            int length = antsDeSerializeTemplate.getByteBufferTemplate ().getLength ();
+        Field[] declaredFields = domainClass.getDeclaredFields();
+        AntsDeSerializeTemplate antsDeSerializeTemplate = AntsDeSerializeTemplateBuilder.builderAntsDeSerializeTemplate(domainBytes);
+        while (true) {
+            int length = antsDeSerializeTemplate.getByteBufferTemplate().getLength();
             if (length == 0) {
                 break;
             }
-            byte offset = antsDeSerializeTemplate.getOffset ();
-            Field field=declaredFields[offset];
+            byte offset = antsDeSerializeTemplate.getOffset();
+            Field field = declaredFields[offset];
             try {
-                DeSerializeFieldFactory.deSerializeField (antsDeSerializeTemplate,offset,domain,field);
+                DeSerializeFieldFactory.deSerializeField(antsDeSerializeTemplate, offset, domain, field);
             } catch (Exception e) {
-                log.error ("deSerializeObject",e);
+                log.error("deSerializeObject", e);
             }
         }
 

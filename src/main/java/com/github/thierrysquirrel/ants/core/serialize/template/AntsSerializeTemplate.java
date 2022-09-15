@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.serialize.template;
 
 import com.github.thierrysquirrel.ants.core.serialize.AbstractAntsSerialize;
@@ -23,76 +23,76 @@ import java.util.Map;
 /**
  * Classname: AntsSerializeTemplate
  * Description:
- * Date: 2021/11/3 14:49
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class AntsSerializeTemplate extends AbstractAntsSerialize {
 
     public void putByte(Byte data) {
-        basePutByte (data, Boolean.FALSE);
+        basePutByte(data, Boolean.FALSE);
     }
 
     public void putShort(Short data) {
-        basePutShort (data, Boolean.FALSE);
+        basePutShort(data, Boolean.FALSE);
     }
 
     public void putInteger(Integer data) {
-        basePutInteger (data, Boolean.FALSE);
+        basePutInteger(data, Boolean.FALSE);
     }
 
     public void putLong(Long data) {
-        basePutLong (data, Boolean.FALSE);
+        basePutLong(data, Boolean.FALSE);
     }
 
     public void putFloat(Float data) {
-        basePutFloat (data, Boolean.FALSE);
+        basePutFloat(data, Boolean.FALSE);
     }
 
     public void putDouble(Double data) {
-        basePutDouble (data, Boolean.FALSE);
+        basePutDouble(data, Boolean.FALSE);
     }
 
     public void putBoolean(Boolean data) {
-        basePutBoolean (data, Boolean.FALSE);
+        basePutBoolean(data, Boolean.FALSE);
     }
 
     public void putCharacter(Character data) {
-        basePutCharacter (data, Boolean.FALSE);
+        basePutCharacter(data, Boolean.FALSE);
     }
 
     public void putString(String data) {
-        basePutString (data, Boolean.FALSE);
+        basePutString(data, Boolean.FALSE);
     }
 
     public void putEnum(Enum<?> data) {
-        basePutEnum (data, Boolean.FALSE, Boolean.FALSE);
+        basePutEnum(data, Boolean.FALSE, Boolean.FALSE);
     }
 
     public void putDomain(Object data) {
-        basePutDomain (data, Boolean.FALSE, Boolean.FALSE);
+        basePutDomain(data, Boolean.FALSE, Boolean.FALSE);
     }
 
     public void putObject(Object data) {
-        basePutObject (data, Boolean.TRUE);
+        basePutObject(data, Boolean.TRUE);
     }
 
     public void putArrays(Object data) {
-        List<Object> list = List.of ((Object[]) data);
-        putList (list);
+        List<Object> list = List.of((Object[]) data);
+        putList(list);
     }
 
     public void putList(List<Object> list) {
         for (Object data : list) {
-            basePutObject (data, Boolean.FALSE);
+            basePutObject(data, Boolean.FALSE);
         }
     }
 
     public void putMap(Map<Object, Object> map) {
-        for (Map.Entry<Object, Object> entry : map.entrySet ()) {
-            basePutObject (entry.getKey (), Boolean.FALSE);
-            basePutObject (entry.getValue (), Boolean.FALSE);
+        for (Map.Entry<Object, Object> entry : map.entrySet()) {
+            basePutObject(entry.getKey(), Boolean.FALSE);
+            basePutObject(entry.getValue(), Boolean.FALSE);
         }
     }
 }

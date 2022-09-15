@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.deserialize.factory;
 
 import com.github.thierrysquirrel.ants.core.constant.BaseTypeNameConstant;
@@ -24,35 +24,35 @@ import java.lang.reflect.Field;
 /**
  * Classname: DeSerializeFieldFactory
  * Description:
- * Date: 2021/11/3 16:45
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class DeSerializeFieldFactory {
     private DeSerializeFieldFactory() {
     }
 
     public static void deSerializeField(AntsDeSerializeTemplate antsDeSerializeTemplate, byte offset, Object domain, Field field) throws ClassNotFoundException, IllegalAccessException {
-        field.setAccessible (Boolean.TRUE);
-        Class<?> fieldType = field.getType ();
-        if (fieldType.isEnum ()) {
-            Object data = antsDeSerializeTemplate.getEnum (fieldType);
-            field.set (domain, data);
+        field.setAccessible(Boolean.TRUE);
+        Class<?> fieldType = field.getType();
+        if (fieldType.isEnum()) {
+            Object data = antsDeSerializeTemplate.getEnum(fieldType);
+            field.set(domain, data);
             return;
         }
-        if (fieldType.isArray ()) {
-            String typeName = fieldType.getTypeName ();
-            if (typeName.equals (BaseTypeNameConstant.BYTE_ARRAY)) {
-                byte[] data = antsDeSerializeTemplate.getBytes ();
-                field.set (domain, data);
+        if (fieldType.isArray()) {
+            String typeName = fieldType.getTypeName();
+            if (typeName.equals(BaseTypeNameConstant.BYTE_ARRAY)) {
+                byte[] data = antsDeSerializeTemplate.getBytes();
+                field.set(domain, data);
                 return;
             }
-            Class<?> arrayClass = GenericTypeConvertClassFactory.getArrayClass (field.getGenericType ().toString ());
-            Object[] data = antsDeSerializeTemplate.getArrays (offset, arrayClass, field.getType ().getComponentType ());
-            field.set (domain, data);
+            Class<?> arrayClass = GenericTypeConvertClassFactory.getArrayClass(field.getGenericType().toString());
+            Object[] data = antsDeSerializeTemplate.getArrays(offset, arrayClass, field.getType().getComponentType());
+            field.set(domain, data);
             return;
         }
-        DeSerializeFieldStrategy.deSerializeField (antsDeSerializeTemplate, offset, domain, field);
+        DeSerializeFieldStrategy.deSerializeField(antsDeSerializeTemplate, offset, domain, field);
     }
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.template;
 
 import com.github.thierrysquirrel.ants.core.template.constant.ByteBufferTemplateConstant;
@@ -24,132 +24,132 @@ import java.nio.ByteBuffer;
 /**
  * Classname: ByteBufferTemplate
  * Description:
- * Date: 2021/11/3 13:34
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 @Data
 public class ByteBufferTemplate {
     private ByteBuffer byteBuffer;
     private int makePosition = -1;
 
     public void make() {
-        setMakePosition (byteBuffer.position ());
+        setMakePosition(byteBuffer.position());
     }
 
     public void reset() {
-        byteBuffer.position (getMakePosition ());
+        byteBuffer.position(getMakePosition());
     }
 
     public void clearMake() {
-        setMakePosition (-1);
+        setMakePosition(-1);
     }
 
     public void flip() {
-        byteBuffer.flip ();
+        byteBuffer.flip();
     }
 
     public int getLength() {
-        return ByteBufferFactory.getLength (byteBuffer);
+        return ByteBufferFactory.getLength(byteBuffer);
     }
 
 
     public void putBytes(byte[] value) {
-        cyclicExpansion (value.length);
-        byteBuffer.put (value);
+        cyclicExpansion(value.length);
+        byteBuffer.put(value);
     }
 
     public void putByte(byte value) {
-        automaticExpansion ();
-        byteBuffer.put (value);
+        automaticExpansion();
+        byteBuffer.put(value);
     }
 
     public void putShort(short value) {
-        automaticExpansion ();
-        byteBuffer.putShort (value);
+        automaticExpansion();
+        byteBuffer.putShort(value);
     }
 
     public void putInt(int value) {
-        automaticExpansion ();
-        byteBuffer.putInt (value);
+        automaticExpansion();
+        byteBuffer.putInt(value);
     }
 
     public void putLong(long value) {
-        automaticExpansion ();
-        byteBuffer.putLong (value);
+        automaticExpansion();
+        byteBuffer.putLong(value);
     }
 
     public void putFloat(float value) {
-        automaticExpansion ();
-        byteBuffer.putFloat (value);
+        automaticExpansion();
+        byteBuffer.putFloat(value);
     }
 
     public void putDouble(double value) {
-        automaticExpansion ();
-        byteBuffer.putDouble (value);
+        automaticExpansion();
+        byteBuffer.putDouble(value);
     }
 
     public void putChar(char value) {
-        automaticExpansion ();
-        byteBuffer.putChar (value);
+        automaticExpansion();
+        byteBuffer.putChar(value);
     }
 
     public byte[] getAllBytes() {
-        byteBuffer.flip ();
-        return ByteBufferFactory.getAllBytes (byteBuffer);
+        byteBuffer.flip();
+        return ByteBufferFactory.getAllBytes(byteBuffer);
     }
 
     public byte getByte() {
-        return byteBuffer.get ();
+        return byteBuffer.get();
     }
 
     public void getBytes(byte[] value) {
-        byteBuffer.get (value);
+        byteBuffer.get(value);
     }
 
     public short getShort() {
-        return byteBuffer.getShort ();
+        return byteBuffer.getShort();
     }
 
     public int getInt() {
-        return byteBuffer.getInt ();
+        return byteBuffer.getInt();
     }
 
     public long getLong() {
-        return byteBuffer.getLong ();
+        return byteBuffer.getLong();
     }
 
     public float getFloat() {
-        return byteBuffer.getFloat ();
+        return byteBuffer.getFloat();
     }
 
     public double getDouble() {
-        return byteBuffer.getDouble ();
+        return byteBuffer.getDouble();
     }
 
     public char getChar() {
-        return byteBuffer.getChar ();
+        return byteBuffer.getChar();
     }
 
     private void cyclicExpansion(int valueSize) {
-        while (valueSize > getLength ()) {
-            byteBuffer.flip ();
-            expansion ();
+        while (valueSize > getLength()) {
+            byteBuffer.flip();
+            expansion();
         }
     }
 
     private void automaticExpansion() {
-        if (isExpansion ()) {
-            byteBuffer.flip ();
-            expansion ();
+        if (isExpansion()) {
+            byteBuffer.flip();
+            expansion();
         }
     }
 
     private boolean isExpansion() {
-        int capacity = byteBuffer.capacity ();
+        int capacity = byteBuffer.capacity();
         double expansionThreshold = capacity * ByteBufferTemplateConstant.EXPANSION_THRESHOLD;
-        int position = byteBuffer.position ();
+        int position = byteBuffer.position();
         if (position < expansionThreshold) {
             return Boolean.FALSE;
         }
@@ -157,14 +157,14 @@ public class ByteBufferTemplate {
     }
 
     private void expansion() {
-        int capacity = byteBuffer.capacity ();
+        int capacity = byteBuffer.capacity();
         int newSize = capacity * ByteBufferTemplateConstant.EXPANSION_SIZE;
-        reallocateCapacity (newSize);
+        reallocateCapacity(newSize);
     }
 
     private void reallocateCapacity(int capacity) {
-        ByteBuffer newBytebuffer = ByteBuffer.allocateDirect (capacity);
-        newBytebuffer.put (byteBuffer);
+        ByteBuffer newBytebuffer = ByteBuffer.allocateDirect(capacity);
+        newBytebuffer.put(byteBuffer);
         byteBuffer = newBytebuffer;
     }
 }

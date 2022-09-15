@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.core.serialize;
 
 import com.github.thierrysquirrel.ants.core.constant.AntsTypeConstant;
@@ -27,11 +27,11 @@ import lombok.Data;
 /**
  * Classname: AbstractAntsSerialize
  * Description:
- * Date: 2021/11/3 13:40
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 @Data
 public abstract class AbstractAntsSerialize {
     private int offset = -1;
@@ -42,213 +42,213 @@ public abstract class AbstractAntsSerialize {
     }
 
     public void putBytes(byte[] data) {
-        putOffset ();
-        putDataLengthAndData (data);
+        putOffset();
+        putDataLengthAndData(data);
     }
 
     protected void basePutByte(Byte data, boolean isPutType) {
-        putOffset ();
+        putOffset();
         if (isPutType) {
-            byteBufferTemplate.putByte (AntsTypeConstant.BYTE);
+            byteBufferTemplate.putByte(AntsTypeConstant.BYTE);
         }
-        putData (data);
+        putData(data);
     }
 
     protected void basePutShort(Short data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger (data, AntsTypeConstant.SHORT);
+            basePutCommonInteger(data, AntsTypeConstant.SHORT);
         } else {
-            basePutCommonInteger (data, null);
+            basePutCommonInteger(data, null);
         }
     }
 
     protected void basePutInteger(Integer data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger (data, AntsTypeConstant.INTEGER);
+            basePutCommonInteger(data, AntsTypeConstant.INTEGER);
         } else {
-            basePutCommonInteger (data, null);
+            basePutCommonInteger(data, null);
         }
     }
 
     protected void basePutLong(Long data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger (data, AntsTypeConstant.LONG);
+            basePutCommonInteger(data, AntsTypeConstant.LONG);
         } else {
-            basePutCommonInteger (data, null);
+            basePutCommonInteger(data, null);
         }
     }
 
     protected void basePutFloat(Float data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger (Float.floatToRawIntBits (data), AntsTypeConstant.FLOAT);
+            basePutCommonInteger(Float.floatToRawIntBits(data), AntsTypeConstant.FLOAT);
         } else {
-            basePutCommonInteger (Float.floatToRawIntBits (data), null);
+            basePutCommonInteger(Float.floatToRawIntBits(data), null);
 
         }
     }
 
     protected void basePutDouble(Double data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger (Double.doubleToRawLongBits (data), AntsTypeConstant.DOUBLE);
+            basePutCommonInteger(Double.doubleToRawLongBits(data), AntsTypeConstant.DOUBLE);
         } else {
-            basePutCommonInteger (Double.doubleToRawLongBits (data), null);
+            basePutCommonInteger(Double.doubleToRawLongBits(data), null);
         }
     }
 
     protected void basePutBoolean(Boolean data, boolean isPutType) {
-        putOffset ();
-        byte booleanByte = ByteBooleanConvertFactory.booleanConvertByte (data);
+        putOffset();
+        byte booleanByte = ByteBooleanConvertFactory.booleanConvertByte(data);
         if (isPutType) {
-            byteBufferTemplate.putByte (AntsTypeConstant.BOOLEAN);
+            byteBufferTemplate.putByte(AntsTypeConstant.BOOLEAN);
         }
-        byteBufferTemplate.putByte (booleanByte);
+        byteBufferTemplate.putByte(booleanByte);
     }
 
     protected void basePutCharacter(Character data, boolean isPutType) {
         if (isPutType) {
-            basePutCommonInteger ((int) data, AntsTypeConstant.CHARACTER);
+            basePutCommonInteger((int) data, AntsTypeConstant.CHARACTER);
         } else {
-            basePutCommonInteger ((int) data, null);
+            basePutCommonInteger((int) data, null);
         }
     }
 
     protected void basePutString(String data, boolean isPutType) {
-        putOffset ();
+        putOffset();
         if (isPutType) {
-            byteBufferTemplate.putByte (AntsTypeConstant.STRING);
+            byteBufferTemplate.putByte(AntsTypeConstant.STRING);
         }
-        byte[] dataBytes = data.getBytes ();
-        putDataLengthAndData (dataBytes);
+        byte[] dataBytes = data.getBytes();
+        putDataLengthAndData(dataBytes);
     }
 
     protected void basePutEnum(Enum<?> data, boolean isPutType, boolean isPutClass) {
-        putOffset ();
+        putOffset();
         if (isPutType) {
-            byteBufferTemplate.putByte (AntsTypeConstant.ENUM);
+            byteBufferTemplate.putByte(AntsTypeConstant.ENUM);
         }
-        byte enumByte = (byte) data.ordinal ();
+        byte enumByte = (byte) data.ordinal();
 
-        byteBufferTemplate.putByte (enumByte);
+        byteBufferTemplate.putByte(enumByte);
 
         if (isPutClass) {
-            putClass (data);
+            putClass(data);
         }
     }
 
     protected void basePutDomain(Object data, boolean isPutType, boolean isPutClass) {
-        putOffset ();
+        putOffset();
         if (isPutType) {
-            byteBufferTemplate.putByte (AntsTypeConstant.DOMAIN);
+            byteBufferTemplate.putByte(AntsTypeConstant.DOMAIN);
         }
-        byte[] serialize = AntsUtils.serialize (data);
-        putDataLengthAndData (serialize);
+        byte[] serialize = AntsUtils.serialize(data);
+        putDataLengthAndData(serialize);
 
         if (isPutClass) {
-            putClass (data);
+            putClass(data);
         }
     }
 
     protected void basePutObject(Object data, boolean isPutClass) {
-        Class<?> dataClass = data.getClass ();
-        if (dataClass.isEnum ()) {
-            basePutEnum ((Enum<?>) data, Boolean.TRUE, isPutClass);
+        Class<?> dataClass = data.getClass();
+        if (dataClass.isEnum()) {
+            basePutEnum((Enum<?>) data, Boolean.TRUE, isPutClass);
             return;
         }
-        String typeName = dataClass.getTypeName ();
+        String typeName = dataClass.getTypeName();
         switch (typeName) {
             case BaseTypeNameConstant.BYTE: {
-                basePutByte ((Byte) data, Boolean.TRUE);
+                basePutByte((Byte) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.SHORT: {
-                basePutShort ((Short) data, Boolean.TRUE);
+                basePutShort((Short) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.INTEGER: {
-                basePutInteger ((Integer) data, Boolean.TRUE);
+                basePutInteger((Integer) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.LONG: {
-                basePutLong ((Long) data, Boolean.TRUE);
+                basePutLong((Long) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.FLOAT: {
-                basePutFloat ((Float) data, Boolean.TRUE);
+                basePutFloat((Float) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.DOUBLE: {
-                basePutDouble ((Double) data, Boolean.TRUE);
+                basePutDouble((Double) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.BOOLEAN: {
-                basePutBoolean ((Boolean) data, Boolean.TRUE);
+                basePutBoolean((Boolean) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.CHARACTER: {
-                basePutCharacter ((Character) data, Boolean.TRUE);
+                basePutCharacter((Character) data, Boolean.TRUE);
                 break;
             }
             case BaseTypeNameConstant.STRING: {
-                basePutString ((String) data, Boolean.TRUE);
+                basePutString((String) data, Boolean.TRUE);
                 break;
             }
             default: {
-                basePutDomain (data, Boolean.TRUE, isPutClass);
+                basePutDomain(data, Boolean.TRUE, isPutClass);
             }
         }
     }
 
 
     private void putOffset() {
-        byteBufferTemplate.putByte ((byte) offset);
+        byteBufferTemplate.putByte((byte) offset);
     }
 
     private void putData(byte data) {
-        byteBufferTemplate.putByte (data);
+        byteBufferTemplate.putByte(data);
     }
 
     private void putDataLength(int dataLength) {
-        byte length = DataLengthLevelStrategy.getDataLengthLevel (dataLength);
-        byteBufferTemplate.putByte (length);
+        byte length = DataLengthLevelStrategy.getDataLengthLevel(dataLength);
+        byteBufferTemplate.putByte(length);
         if (length < 0) {
-            byte[] data = BitOperationFactory.commonSerializeInteger (dataLength);
-            putData (data);
+            byte[] data = BitOperationFactory.commonSerializeInteger(dataLength);
+            putData(data);
         }
     }
 
 
     private void putData(byte[] data) {
-        byteBufferTemplate.putBytes (data);
+        byteBufferTemplate.putBytes(data);
     }
 
     private void putDataLengthAndData(byte[] data) {
-        putDataLength (data.length);
-        putData (data);
+        putDataLength(data.length);
+        putData(data);
     }
 
 
     private void putIsReverse(Object data) {
-        long dataLong = Long.parseLong (data.toString ());
-        boolean isReverse = DataLengthLevelStrategy.isReverse (dataLong);
+        long dataLong = Long.parseLong(data.toString());
+        boolean isReverse = DataLengthLevelStrategy.isReverse(dataLong);
         if (isReverse) {
-            byteBufferTemplate.putByte ((byte) 1);
+            byteBufferTemplate.putByte((byte) 1);
         } else {
-            byteBufferTemplate.putByte ((byte) 0);
+            byteBufferTemplate.putByte((byte) 0);
         }
     }
 
     private void putClass(Object data) {
-        byte[] bytes = data.getClass ().getTypeName ().getBytes ();
-        putDataLengthAndData (bytes);
+        byte[] bytes = data.getClass().getTypeName().getBytes();
+        putDataLengthAndData(bytes);
     }
 
     private void basePutCommonInteger(Object data, Byte type) {
-        putOffset ();
+        putOffset();
         if (type != null) {
-            byteBufferTemplate.putByte (type);
+            byteBufferTemplate.putByte(type);
         }
-        byte[] dataBytes = BitOperationFactory.commonSerializeInteger (data);
-        putDataLengthAndData (dataBytes);
-        putIsReverse (data);
+        byte[] dataBytes = BitOperationFactory.commonSerializeInteger(data);
+        putDataLengthAndData(dataBytes);
+        putIsReverse(data);
     }
 }

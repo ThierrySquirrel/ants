@@ -1,5 +1,5 @@
 /**
- * Copyright 2021 the original author or authors.
+ * Copyright 2024/8/8 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ **/
 package com.github.thierrysquirrel.ants.utils;
 
 import com.github.thierrysquirrel.ants.core.deserialize.factory.DeSerializeObjectFactory;
@@ -22,20 +22,20 @@ import com.github.thierrysquirrel.ants.core.serialize.factory.SerializeObjectFac
 /**
  * Classname: AntsUtils
  * Description:
- * Date: 2021/11/3 13:31
+ * Date:2024/8/8
  *
  * @author ThierrySquirrel
- * @since JDK 11
- */
+ * @since JDK21
+ **/
 public class AntsUtils {
     private AntsUtils() {
     }
 
     public static byte[] serialize(Object domain) {
-        return SerializeObjectFactory.serializeObject (domain);
+        return SerializeObjectFactory.serializeObject(domain);
     }
 
     public static <T> T deSerialize(byte[] domainBytes, Class<T> domainClass) {
-        return DeSerializeObjectFactory.deSerializeObject (domainBytes, domainClass);
+        return DeSerializeObjectFactory.deSerializeObject(domainBytes, domainClass);
     }
 }
