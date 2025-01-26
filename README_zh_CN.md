@@ -62,4 +62,3 @@ public class User {
 }
 ```
 
-![Russian flag](https://user-images.githubusercontent.com/49895274/190374657-b41dcfac-f620-4c9a-b152-4b4908f53ce7.png)
