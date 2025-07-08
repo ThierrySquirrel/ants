@@ -20,9 +20,9 @@ byte[].
 ```xml
 <!--Adding dependencies to pom. XML-->
         <dependency>
-            <groupId>com.github.thierrysquirrel</groupId>
+            <groupId>io.github.thierrysquirrel</groupId>
             <artifactId>ants</artifactId>
-            <version>1.1.0.0-RELEASE</version>
+            <version>1.2.0.0-RELEASE</version>
         </dependency>
 ```
 
